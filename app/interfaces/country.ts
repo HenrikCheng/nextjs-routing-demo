@@ -79,3 +79,9 @@ interface Flags {
 interface CapitalInfo {
 	latlng: number[];
 }
+
+interface CountriesPageProps {
+	params: {
+		id: string;
+	};
+}
