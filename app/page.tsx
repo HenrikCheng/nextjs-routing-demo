@@ -1,36 +1,28 @@
-"use client";
-
 import Image from "next/image";
 import Navbar from "./components/Navbar";
-import { useEffect, useState } from "react";
 
-export default function Home() {
-	const [countries, setCountries] = useState<Country[] | null>(null);
-	useEffect(() => {
-		fetch("https://restcountries.com/v3.1/all", {
-			method: "GET",
-		})
-			.then((response) => response.json())
-			.then((data) =>
-				data.sort(
-					(a: { name: { common: string } }, b: { name: { common: string } }) =>
-						a.name.common.localeCompare(b.name.common),
-				),
-			)
-			.then((data) => {
-				console.log("🚀 ~ .then ~ data:", data);
-				setCountries(data);
-			})
-			.catch((error) => console.log(error));
-	}, []);
-	console.log("🚀 ~ .then ~ countries:", countries);
+interface Country {
+	ccn3: string;
+	name: { common: string };
+	flags: { svg: string };
+}
+
+export default async function Home() {
+	// Fetch the data directly in the server component
+	const response = await fetch("https://restcountries.com/v3.1/all");
+	const data: Country[] = await response.json();
+
+	// Sort the countries array by country.name.common
+	const sortedCountries = data.sort((a, b) =>
+		a.name.common.localeCompare(b.name.common),
+	);
 
 	return (
 		<main>
 			<Navbar />
 			<div className="grid gap-x-8 gap-y-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
-				{countries?.map((country: Country) => (
-					<div key={country?.ccn3}>
+				{sortedCountries.map((country) => (
+					<div key={country.ccn3}>
 						<h2>{country.name.common}</h2>
 						<Image
 							src={country.flags.svg}
