@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Navbar from "./components/Navbar";
 import Link from "next/link";
 
 export default async function Home() {
@@ -11,7 +10,6 @@ export default async function Home() {
 
 	return (
 		<main>
-			<Navbar />
 			<div className="grid gap-x-8 gap-y-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
 				{sortedCountries.map((country) => (
 					<Link
@@ -22,8 +20,8 @@ export default async function Home() {
 						<Image
 							src={country.flags.svg}
 							alt={`${country.name.common} flag`}
-							width={100}
-							height={100}
+							width={200}
+							height={200}
 							objectFit="contain"
 							loading="lazy"
 						/>
