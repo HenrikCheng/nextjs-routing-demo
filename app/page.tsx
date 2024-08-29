@@ -2,12 +2,6 @@ import Image from "next/image";
 import Navbar from "./components/Navbar";
 import Link from "next/link";
 
-interface Country {
-	ccn3: string;
-	name: { common: string };
-	flags: { svg: string };
-}
-
 export default async function Home() {
 	const response = await fetch("https://restcountries.com/v3.1/all");
 	const data: Country[] = await response.json();
