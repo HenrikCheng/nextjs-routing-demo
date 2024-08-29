@@ -43,9 +43,6 @@ const CountryPage: FC<CountriesPageProps> = async ({ params }) => {
 						<strong>Region:</strong> {countryData.region}
 					</li>
 					<li>
-						<strong>Subregion:</strong> {countryData.subregion}
-					</li>
-					<li>
 						<strong>Population:</strong>{" "}
 						{countryData.population.toLocaleString()}
 					</li>
